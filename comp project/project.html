@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Forms</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+            color: #333;
+        }
+
+        .login-container {
+            background: #fff;
+            color: #333;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #FF6A88;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #FF6A88;
+            box-shadow: 0 0 5px rgba(255, 106, 136, 0.5);
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            color: #fff;
+            background: linear-gradient(135deg, #FF6A88, #FF8C6F);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .form-group button:hover {
+            background: linear-gradient(135deg, #FF8C6F, #FF6A88);
+        }
+
+        .toggle-btn {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #FF6A88;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="adminLoginContainer">
+        <h2>Admin Login</h2>
+        <form onsubmit="event.preventDefault(); loginAdmin();">
+            <div class="form-group">
+                <label for="admin-username">Username</label>
+                <input type="text" id="admin-username" name="admin-username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="admin-password">Password</label>
+                <input type="password" id="admin-password" name="admin-password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login as Admin</button>
+            </div>
+        </form>
+        <button class="toggle-btn" onclick="toggleLoginForm()">Login as Student</button>
+    </div>
+
+    <div class="login-container" id="studentLoginContainer" style="display: none;">
+        <h2>Student Login</h2>
+        <form onsubmit="event.preventDefault(); loginStudent();">
+            <div class="form-group">
+                <label for="student-username">Username</label>
+                <input type="text" id="student-username" name="student-username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="student-password">Password</label>
+                <input type="password" id="student-password" name="student-password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login as Student</button>
+            </div>
+        </form>
+        <button class="toggle-btn" onclick="toggleLoginForm()">Login as Admin</button>
+    </div>
+
+    <script>
+        function toggleLoginForm() {
+            const adminForm = document.getElementById('adminLoginContainer');
+            const studentForm = document.getElementById('studentLoginContainer');
+
+            if (adminForm.style.display === 'none') {
+                adminForm.style.display = 'block';
+                studentForm.style.display = 'none';
+            } else {
+                adminForm.style.display = 'none';
+                studentForm.style.display = 'block';
+            }
+        }
+
+        function loginAdmin() {
+            const username = document.getElementById('admin-username').value;
+            const password = document.getElementById('admin-password').value;
+
+            const validAdminUsername = "admin";
+            const validAdminPassword = "12345";
+
+            if (username === validAdminUsername && password === validAdminPassword) {
+                window.location.href = "student_management.php";
+            } else {
+                alert('Invalid admin credentials. Please try again.');
+            }
+        }
+
+        function loginStudent() {
+            const username = document.getElementById('student-username').value;
+            const password = document.getElementById('student-password').value;
+
+            const validStudentUsername = "student";
+            const validStudentPassword = "12345";
+
+            if (username === validStudentUsername && password === validStudentPassword) {
+                window.location.href = "student_dashboard.php";
+            } else {
+                alert('Invalid student credentials. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
